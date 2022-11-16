@@ -1,0 +1,19 @@
+---
+import type { ArticleList } from '@/types/api/article'
+
+export interface Props {
+  articleList: ArticleList
+}
+
+const { articleList } = Astro.props
+---
+
+<ul>
+  {
+    articleList.items.map((o) => (
+      <li>
+        <a href={`/${o.id}`}>{o.title}</a>
+      </li>
+    ))
+  }
+</ul>
