@@ -1,0 +1,35 @@
+---
+import { clsx } from 'clsx'
+
+import type { Article } from '@/types/api/article'
+
+import Layout from '@/layouts/Layout.astro'
+import ArticleDetail from '@/components/features/article/ArticleDetail/index.astro'
+import articles from '@/contents/articles.json'
+
+interface Props {
+  article: Article
+}
+
+export function getStaticPaths() {
+  return articles.map((o) => {
+    return {
+      params: {
+        id: o.id,
+      },
+      props: {
+        article: o,
+      },
+    }
+  })
+}
+
+const { article } = Astro.props
+---
+
+<Layout title={article.title}>
+  <div class={clsx('tw-py-4')}>
+    <a href={'/'}>back</a>
+    <ArticleDetail article={article} />
+  </div>
+</Layout>
